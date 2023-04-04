@@ -1,0 +1,36 @@
+@font-face {
+  font-family: 'Inter';
+  src: url("./lib/assets/fonts/inter/Inter-VariableFont_slnt,wght.ttf") format("truetype-variations");
+  font-weight: 100 1000;
+}
+
+
+@font-face {
+  font-family: 'Lora';
+  src: url("./lib/assets/fonts/lora/Lora-Italic-VariableFont_wght.ttf") format("truetype-variations");
+  font-weight: 100 1000;
+}
+
+@font-face {
+  font-family: 'Inconsolata';
+  src: url("./lib/assets/fonts/inconsolata/Inconsolata-VariableFont_wdth,wght.ttf") format("truetype-variations");
+  font-weight: 100 1000;
+}
+
+:root {
+  --font-sans-serif: 'Inter', sans-serif;
+  --font-serif: 'Lora', serif;
+  --font-mono: 'Inconsolata';
+  --fw-bold: 700;
+
+  --color-black: #050505;
+  --color-nearly-black: #1f1f1f;
+  --color-very-dark-gray: #2d2d2d;
+  --color-dark-gray: #3a3a3a;
+  --color-gray: #757575;
+  --color-light-gray: #e9e9e9;
+  --color-very-light-gray: #f4f4f4;
+  --color-white: #ffffff;
+  --color-purple: #a445ed;
+  --color-red: #ff5252;
+}
