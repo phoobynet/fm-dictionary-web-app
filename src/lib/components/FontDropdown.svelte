@@ -58,6 +58,7 @@
   {#if open}
     <div
       class="dropdown"
+      transition:slide
     >
       <ul>
         {#each options as option}
