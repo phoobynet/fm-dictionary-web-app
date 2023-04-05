@@ -18,10 +18,16 @@
 }
 
 :root {
+  color-scheme: light dark;
+  --layout-mobile: 375px;
+  --layout-tablet: 768px;
+  --layout-desktop: 1440px;
+
   --font-sans-serif: 'Inter', sans-serif;
   --font-serif: 'Lora', serif;
   --font-mono: 'Inconsolata';
   --fw-bold: 700;
+
 
   --color-black: #050505;
   --color-nearly-black: #1f1f1f;
@@ -33,4 +39,26 @@
   --color-white: #ffffff;
   --color-purple: #a445ed;
   --color-red: #ff5252;
+
+  body.dark {
+    --color-text-primary: var(--color-white);
+    --color-bg-primary: var(--color-black);
+    --color-input-bg: var(--color-nearly-black);
+    --color-input-text: var(--color-white);
+    --color-input-placeholder: var(--color-white);
+  }
+
+  body.light {
+    --color-text-primary: var(--color-black);
+    --color-bg-primary: var(--color-white);
+    --color-input-bg: var(--color-very-light-gray);
+    --color-input-text: var(--color-very-dark-gray);
+    --color-input-placeholder: var(--color-very-dark-gray);
+  }
+
+}
+
+
+body {
+  background-color: var(--color-bg-primary);
 }

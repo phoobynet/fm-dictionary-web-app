@@ -1,0 +1,6 @@
+/* TEAM */
+Developed by: phoobynet
+Site: https://github.com/phoobynet/fm-dictionary-web-app
+
+/* SITE */
+Software: Sveltekit/Everything Jetrbrains/Vercel
