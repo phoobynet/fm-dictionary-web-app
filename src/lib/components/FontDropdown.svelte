@@ -48,7 +48,7 @@
   }}
 >
   <div class="selected">
-    <div>
+    <div class="current">
       {desc($fontFamily)}
     </div>
     <div>
@@ -58,7 +58,6 @@
   {#if open}
     <div
       class="dropdown"
-      transition:slide
     >
       <ul>
         {#each options as option}
@@ -92,6 +91,10 @@
       align-items: center;
       gap: 1rem;
       color: var(--color-text-primary);
+
+      .current {
+        letter-spacing: 0.1rem;
+      }
     }
 
     .dropdown {
