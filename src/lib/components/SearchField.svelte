@@ -33,10 +33,6 @@
 </div>
 
 <style lang="scss">
-  @import "$lib/assets/styles/variables";
-
-  $input-height: 3rem;
-
   .search-input {
     .input-content {
       display: grid;
@@ -60,7 +56,7 @@
         font-size: 1rem;
         font-weight: bold;
         line-height: 1.25rem;
-        height: $input-height;
+        height: 3rem;
         color: var(--color-input-text);
         border: none;
         outline: none;
@@ -88,7 +84,7 @@
     }
   }
 
-  @media (min-width: $layout-tablet) {
+  @media (min-width: 768px) {
     .search-input {
       .input-content {
         .input {
@@ -98,6 +94,4 @@
     }
   }
 
-  @media (min-width: $layout-desktop) {
-  }
 </style>

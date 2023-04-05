@@ -1,5 +1,6 @@
 <script lang="ts">
   import { theme } from '$lib/stores/theme'
+  import IconMoon from '$lib/components/IconMoon.svelte'
 
   const onClick = () => {
     theme.update(curr => curr === 'dark'
@@ -8,43 +9,52 @@
   }
 </script>
 
-<div
-  class="toggle-theme"
-  on:click={onClick}
-  class:on={$theme === 'dark'}
->
+<div class="container">
   <div
-    class="slider"
-  ></div>
+    class="toggle-theme"
+    on:click={onClick}
+    class:on={$theme === 'dark'}
+  >
+    <div
+      class="slider"
+    ></div>
+  </div>
+  <IconMoon />
 </div>
 
 <style lang="scss">
-  .toggle-theme {
-    position: relative;
+  .container {
     display: flex;
     align-items: center;
-    width: 40px;
-    height: 20px;
-    cursor: pointer;
-    border-radius: 10px;
-    background-color: var(--color-gray);
+    gap: 0.75rem;
+
+    .toggle-theme {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 40px;
+      height: 20px;
+      cursor: pointer;
+      border-radius: 10px;
+      background-color: var(--color-gray);
 
 
-    &.on {
-      .slider {
-        transform: translateX(20px);
+      &.on {
+        .slider {
+          transform: translateX(20px);
+        }
+
+        background-color: var(--color-purple);
       }
 
-      background-color: var(--color-purple);
-    }
-
-    .slider {
-      transition: all 0.2s ease-in-out;
-      width: 14px;
-      height: 14px;
-      margin: 0 0.2rem;
-      border-radius: 1rem;
-      background-color: var(--color-white);
+      .slider {
+        transition: all 0.2s ease-in-out;
+        width: 14px;
+        height: 14px;
+        margin: 0 0.2rem;
+        border-radius: 1rem;
+        background-color: var(--color-white);
+      }
     }
   }
 </style>

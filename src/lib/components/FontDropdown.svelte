@@ -76,33 +76,35 @@
 
 <style lang="scss">
   .font-dropdown {
+    min-height: 2rem;
     position: relative;
     display: flex;
     justify-content: end;
-    width: 183px;
     cursor: pointer;
     background-color: var(--color-bg-primary);
+    //background-color: pink;
 
     .selected {
-      font-size: 18px;
+      font-size: 14px;
       font-weight: bold;
-      line-height: 24px;
+      line-height: 14px;
       display: flex;
       align-items: center;
       gap: 1rem;
+      color: var(--color-text-primary);
     }
 
     .dropdown {
+      -webkit-appearance: none;
       position: absolute;
       z-index: 999;
-      top: 1.6rem;
+      top: 2rem;
       width: 183px;
       height: 152px;
       padding: 0 1rem;
       border-radius: 1rem;
       background-color: var(--color-bg-primary);
-      box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
-
+      box-shadow: 0 5px 30px var(--color-box-shadow);
 
       ul {
         display: flex;
@@ -116,6 +118,7 @@
           font-size: 18px;
           font-weight: bold;
           transition: all 0.2s ease-in-out;
+          color: var(--color-text-primary);
 
           &:hover {
             color: var(--color-purple);
@@ -137,9 +140,11 @@
     }
 
     @media (min-width: 768px) {
+      .selected {
+        font-size: 18px;
+      }
       .dropdown {
         top: 3rem;
-        box-shadow: 0 5px 30px var(--color-purple);
       }
     }
   }

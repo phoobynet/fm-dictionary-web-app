@@ -37,7 +37,7 @@
   --color-light-gray: #e9e9e9;
   --color-very-light-gray: #f4f4f4;
   --color-white: #ffffff;
-  --color-purple: #a445ed;
+  --color-purple: rgb(164, 69, 237);
   --color-red: #ff5252;
 
   body.dark {
@@ -46,6 +46,7 @@
     --color-input-bg: var(--color-nearly-black);
     --color-input-text: var(--color-white);
     --color-input-placeholder: var(--color-white);
+    --color-box-shadow: var(--color-purple);
   }
 
   body.light {
@@ -54,6 +55,7 @@
     --color-input-bg: var(--color-very-light-gray);
     --color-input-text: var(--color-very-dark-gray);
     --color-input-placeholder: var(--color-very-dark-gray);
+    --color-box-shadow: rgba(0, 0, 0, 0.1);
   }
 
 }
