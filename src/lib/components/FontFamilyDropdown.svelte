@@ -1,23 +1,10 @@
 <script lang="ts">
-  import { FontFamily, fontFamily } from '$lib/stores/fontFamily'
+  import { FontFamily, fontFamily, fontFamilyPrettyName, toPrettyName } from '$lib/stores/fontFamily'
   import IconArrowDown from '$lib/components/IconArrowDown.svelte'
   import { clickOutside } from '$lib/actions/clickOutside'
   import { slide } from 'svelte/transition'
 
   let open = false
-
-  const desc = (ff?: FontFamily): string => {
-    switch (ff) {
-      case FontFamily.SansSerif:
-        return 'Sans Serif'
-      case FontFamily.Serif:
-        return 'Serif'
-      case FontFamily.Mono:
-        return 'Mono'
-      default:
-        return 'Sans Serif'
-    }
-  }
 
   const options = [FontFamily.SansSerif, FontFamily.Serif, FontFamily.Mono]
 
@@ -41,17 +28,19 @@
 <svelte:document on:keyup={handleEscape}></svelte:document>
 
 <div
-  class="font-dropdown"
+  class="font-family-dropdown"
   on:click={onOpenMenu}
   use:clickOutside={() => {
     open = false
   }}
 >
-  <div class="selected">
-    <div class="current">
-      {desc($fontFamily)}
+  <div class="currently-selected-font">
+    <div
+      class={`name-container ${$fontFamily}`}
+    >
+      {$fontFamilyPrettyName}
     </div>
-    <div>
+    <div class="arrow-container">
       <IconArrowDown />
     </div>
   </div>
@@ -66,7 +55,7 @@
             class={option}
             on:click|stopPropagation={() => onFontSelect(option)}
           >
-            {desc(option)}
+            {toPrettyName(option)}
           </li>
         {/each}
       </ul>
@@ -75,31 +64,34 @@
 </div>
 
 <style lang="scss">
-  .font-dropdown {
-    min-height: 2rem;
+  .font-family-dropdown {
     position: relative;
     display: flex;
     justify-content: end;
+    height: 2rem;
     cursor: pointer;
     background-color: var(--color-bg-primary);
-    //background-color: pink;
 
-    .selected {
+    .currently-selected-font {
       font-size: 14px;
       font-weight: bold;
-      line-height: 14px;
-      display: flex;
+      display: grid;
       align-items: center;
-      gap: 1rem;
       color: var(--color-text-primary);
+      gap: 1rem;
+      grid-template-columns: [name] 7rem [arrow] 1rem;
 
-      .current {
-        letter-spacing: 0.1rem;
+      .name-container {
+        text-transform: capitalize;
+        justify-self: end;
+      }
+
+      .arrow-container {
+        justify-self: center;
       }
     }
 
     .dropdown {
-      -webkit-appearance: none;
       position: absolute;
       z-index: 999;
       top: 2rem;
@@ -109,6 +101,7 @@
       border-radius: 1rem;
       background-color: var(--color-bg-primary);
       box-shadow: 0 5px 30px var(--color-box-shadow);
+      -webkit-appearance: none;
 
       ul {
         display: flex;
@@ -122,23 +115,12 @@
           font-size: 18px;
           font-weight: bold;
           transition: all 0.2s ease-in-out;
+          text-transform: capitalize;
           color: var(--color-text-primary);
 
           &:hover {
             color: var(--color-purple);
           }
-        }
-
-        li.sans-serif {
-          font-family: var(--font-sans-serif);
-        }
-
-        li.serif {
-          font-family: var(--font-serif);
-        }
-
-        li.mono {
-          font-family: var(--font-mono);
         }
       }
     }

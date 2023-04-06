@@ -62,6 +62,7 @@
         outline: none;
         background-color: transparent;
         grid-area: input;
+        font-family: inherit;
 
         &::placeholder {
           font-size: 20px;
@@ -77,7 +78,6 @@
     }
 
     .error-message {
-      font-family: var(--font-sans-serif);
       font-size: 20px;
       margin-top: 0.5rem;
       color: var(--color-red);
@@ -93,5 +93,4 @@
       }
     }
   }
-
 </style>

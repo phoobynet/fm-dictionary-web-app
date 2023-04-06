@@ -1,20 +1,26 @@
 @font-face {
   font-family: 'Inter';
   src: url("./lib/assets/fonts/inter/Inter-VariableFont_slnt,wght.ttf") format("truetype-variations");
-  font-weight: 100 1000;
+  font-weight: 400 700;
+  font-display: swap;
+  font-style: normal;
 }
 
 
 @font-face {
   font-family: 'Lora';
   src: url("./lib/assets/fonts/lora/Lora-Italic-VariableFont_wght.ttf") format("truetype-variations");
-  font-weight: 100 1000;
+  font-weight: 400 700;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'Inconsolata';
   src: url("./lib/assets/fonts/inconsolata/Inconsolata-VariableFont_wdth,wght.ttf") format("truetype-variations");
-  font-weight: 100 1000;
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
 }
 
 :root {
@@ -40,6 +46,7 @@
   --color-purple: rgb(164, 69, 237);
   --color-red: #ff5252;
 
+
   body.dark {
     --color-text-primary: var(--color-white);
     --color-bg-primary: var(--color-black);
@@ -57,10 +64,34 @@
     --color-input-placeholder: var(--color-very-dark-gray);
     --color-box-shadow: rgba(0, 0, 0, 0.1);
   }
+}
 
+.serif {
+  font-family: var(--font-serif);
+}
+
+.sans-serif {
+  font-family: var(--font-sans-serif);
+}
+
+.mono {
+  font-family: var(--font-mono);
 }
 
 
 body {
   background-color: var(--color-bg-primary);
+
+  &[data-font-family="sans-serif"] {
+    font-family: var(--font-sans-serif);
+  }
+
+  &[data-font-family="serif"] {
+    font-family: var(--font-serif);
+  }
+
+  &[data-font-family="mono"] {
+    font-family: var(--font-mono);
+  }
 }
+

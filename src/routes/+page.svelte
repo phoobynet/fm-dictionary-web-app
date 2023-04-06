@@ -1,7 +1,7 @@
 <script lang="ts">
   import SearchField from '$lib/components/SearchField.svelte'
   import IconLogo from '$lib/components/IconLogo.svelte'
-  import FontDropdown from '$lib/components/FontDropdown.svelte'
+  import FontFamilyDropdown from '$lib/components/FontFamilyDropdown.svelte'
   import ToggleTheme from '$lib/components/ToggleTheme.svelte'
 </script>
 
@@ -11,7 +11,7 @@
       <IconLogo />
     </div>
     <div class="font-dropdown-container">
-      <FontDropdown />
+      <FontFamilyDropdown />
     </div>
     <div class="vertical-divider"></div>
     <div class="toggle-theme-container">
@@ -21,6 +21,7 @@
   <div class="search-field">
     <SearchField />
   </div>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid autem culpa eos ex harum illum inventore maiores nulla officia quaerat quidem quisquam recusandae repellat, saepe voluptatum. Animi doloremque exercitationem nulla.</p>
 </div>
 
 
