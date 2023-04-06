@@ -27,7 +27,8 @@
 
 <svelte:document on:keyup={handleEscape}></svelte:document>
 
-<div
+<nav
+  aria-label="Main"
   class="font-family-dropdown"
   on:click={onOpenMenu}
   use:clickOutside={() => {
@@ -61,7 +62,7 @@
       </ul>
     </div>
   {/if}
-</div>
+</nav>
 
 <style lang="scss">
   .font-family-dropdown {

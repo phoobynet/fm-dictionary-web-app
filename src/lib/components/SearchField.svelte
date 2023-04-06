@@ -1,6 +1,7 @@
 <script lang="ts">
   import iconSearch from '$lib/assets/images/icon-search.svg'
 
+  export let query = ''
   export let error = ''
 
   let isFocused = false
@@ -16,6 +17,7 @@
       class="input"
       on:blur={() => isFocused = false}
       on:focus={() => isFocused = true}
+      bind:value={query}
       placeholder="Search for any word..."
       type="text"
     >

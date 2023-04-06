@@ -3,6 +3,21 @@
   import IconLogo from '$lib/components/IconLogo.svelte'
   import FontFamilyDropdown from '$lib/components/FontFamilyDropdown.svelte'
   import ToggleTheme from '$lib/components/ToggleTheme.svelte'
+  import { searchResult, search } from '$lib/stores/searchResult'
+  import { debounce } from 'lodash-es'
+  import SearchResult from '$lib/components/SearchResult.svelte'
+  import { fade } from 'svelte/transition'
+
+  let query = ''
+  let loading = false
+
+  const onSubmit = debounce(async () => {
+    try {
+      await search(query)
+    } finally {
+      loading = false
+    }
+  }, 500)
 </script>
 
 <div class="root">
@@ -18,10 +33,22 @@
       <ToggleTheme />
     </div>
   </div>
-  <div class="search-field">
-    <SearchField />
-  </div>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid autem culpa eos ex harum illum inventore maiores nulla officia quaerat quidem quisquam recusandae repellat, saepe voluptatum. Animi doloremque exercitationem nulla.</p>
+  <form
+    class="search-field"
+    on:submit|preventDefault={onSubmit}
+  >
+    <SearchField bind:query />
+  </form>
+  <main class="search-result">
+    {#if loading}
+      <p>TODO: Add spinner loading...</p>
+    {/if}
+    {#if $searchResult && !loading}
+      <div transition:fade>
+        <SearchResult />
+      </div>
+    {/if}
+  </main>
 </div>
 
 
