@@ -1,6 +1,9 @@
 import type { SearchResult } from '$lib/types/SearchResult'
 import { derived, writable } from 'svelte/store'
 import { first } from 'lodash-es'
+import { browser } from '$app/environment'
+
+export const searchQuery = writable<string>('')
 
 export const searchResults = writable<SearchResult[]>([])
 
@@ -18,18 +21,34 @@ export const audioUrl = derived(searchResult, $searchResult => {
   return audioUrl
 })
 
-export const search = async (query: string = ''): Promise<void> => {
-  if (query.trim().length < 2) {
-    return
+export const searching = writable<boolean>(false)
+
+export const search = async (query: string = ''): Promise<boolean> => {
+  if (!browser) {
+    return false
   }
+
+  let result = false
+
+  if (query.trim().length < 2) {
+    return result
+  }
+
+  searching.set(true)
 
   const response = await fetch(`/api/search?q=${query}`)
 
   if (response.ok) {
     const data = await response.json()
     searchResults.set(data)
+    result = true
   } else {
     searchResults.set([])
     console.error(response.statusText)
+    result = false
   }
+
+  searching.set(false)
+
+  return result
 }

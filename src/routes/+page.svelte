@@ -3,21 +3,32 @@
   import IconLogo from '$lib/components/IconLogo.svelte'
   import FontFamilyDropdown from '$lib/components/FontFamilyDropdown.svelte'
   import ToggleTheme from '$lib/components/ToggleTheme.svelte'
-  import { searchResult, search } from '$lib/stores/searchResult'
+  import { searchResult, search, searchResults, searching, searchQuery } from '$lib/stores/searchResult'
   import { debounce } from 'lodash-es'
   import SearchResult from '$lib/components/SearchResult.svelte'
   import { fade } from 'svelte/transition'
+  import type { PageData } from './$types'
+  import { onMount } from 'svelte'
+  import { getQuery } from '$lib/url/getQuery'
+  import NoDefinitionFound from '$lib/components/NoDefinitionFound.svelte'
+  import { pushQuery } from '$lib/url/pushQuery'
 
-  let query = ''
-  let loading = false
+  export let data: PageData
 
   const onSubmit = debounce(async () => {
-    try {
-      await search(query)
-    } finally {
-      loading = false
+    const hasResult = await search($searchQuery)
+
+    if (hasResult) {
+      pushQuery($searchQuery)
     }
   }, 500)
+
+  onMount(() => {
+    searchQuery.set(getQuery())
+    if (data?.result) {
+      searchResults.set(data.result)
+    }
+  })
 </script>
 
 <div class="root">
@@ -37,16 +48,18 @@
     class="search-field"
     on:submit|preventDefault={onSubmit}
   >
-    <SearchField bind:query />
+    <SearchField />
   </form>
   <main class="search-result">
-    {#if loading}
+    {#if $searching}
       <p>TODO: Add spinner loading...</p>
     {/if}
-    {#if $searchResult && !loading}
+    {#if $searchResult && !$searching}
       <div transition:fade>
         <SearchResult />
       </div>
+    {:else if !$searching && $searchResults.length === 0}
+      <NoDefinitionFound />
     {/if}
   </main>
 </div>

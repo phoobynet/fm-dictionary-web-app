@@ -1,7 +1,6 @@
 import type { RequestHandler } from '@sveltejs/kit'
 import { json } from '@sveltejs/kit'
-
-const BASE_URL = 'https://api.dictionaryapi.dev/api/v2/entries/en/'
+import { freeDictionary } from '$lib/server/free-dictionary'
 
 export const GET: RequestHandler = async ({ url }) => {
   const q = url.searchParams.get('q')
@@ -10,18 +9,6 @@ export const GET: RequestHandler = async ({ url }) => {
       status: 400,
     })
   }
-
-  const freeDictionaryUrl = `${BASE_URL}${q}`
-
-  const response = await fetch(freeDictionaryUrl)
-
-  if (response.ok) {
-    const data = await response.json()
-    return json(data)
-  } else {
-    return json(undefined, {
-      status: response.status,
-      statusText: response.statusText,
-    })
-  }
+  const searchResults = await freeDictionary.query(fetch, q)
+  return json(searchResults)
 }
