@@ -1,6 +1,6 @@
 <script lang="ts">
   import { theme } from '$lib/stores/theme'
-  import IconMoon from '$lib/components/IconMoon.svelte'
+  import Moon from '$lib/components/icons/Moon.svelte'
 
   const onClick = () => {
     theme.update(curr => curr === 'dark'
@@ -19,7 +19,7 @@
       class="slider"
     ></div>
   </div>
-  <IconMoon />
+  <Moon />
 </div>
 
 <style lang="scss">

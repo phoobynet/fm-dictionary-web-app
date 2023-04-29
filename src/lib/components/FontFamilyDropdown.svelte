@@ -1,6 +1,6 @@
 <script lang="ts">
   import { FontFamily, fontFamily, fontFamilyPrettyName, toPrettyName } from '$lib/stores/fontFamily'
-  import IconArrowDown from '$lib/components/IconArrowDown.svelte'
+  import ArrowDown from '$lib/components/icons/ArrowDown.svelte'
   import { clickOutside } from '$lib/actions/clickOutside'
   import { slide } from 'svelte/transition'
 
@@ -42,7 +42,7 @@
       {$fontFamilyPrettyName}
     </div>
     <div class="arrow-container">
-      <IconArrowDown />
+      <ArrowDown />
     </div>
   </div>
   {#if open}

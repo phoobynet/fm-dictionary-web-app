@@ -1,6 +1,6 @@
 <script lang="ts">
   import { searchResult, audioUrl, search, searchQuery } from '$lib/stores/searchResult'
-  import IconPlay from '$lib/components/IconPlay.svelte'
+  import Play from '$lib/components/icons/Play.svelte'
   import { pushQuery } from '$lib/url/pushQuery'
 
   const onPlay = () => {
@@ -27,7 +27,7 @@
       <h2 class="phonetic">{$searchResult.phonetic}</h2>
     {/if}
     <div class="play">
-      <IconPlay on:click={onPlay} />
+      <Play on:click={onPlay} />
     </div>
   </header>
 

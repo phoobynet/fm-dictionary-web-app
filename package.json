@@ -10,7 +10,8 @@
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
   },
   "dependencies": {
-    "lodash-es": "^4.17.21"
+    "lodash-es": "^4.17.21",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "^2.0.0",

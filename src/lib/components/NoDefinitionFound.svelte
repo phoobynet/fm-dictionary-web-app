@@ -1,6 +1,3 @@
-<script lang="ts">
-
-</script>
 
 <div class="no-definitions-found">
   <div class="emotion">

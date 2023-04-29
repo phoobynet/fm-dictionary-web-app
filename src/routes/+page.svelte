@@ -1,6 +1,6 @@
 <script lang="ts">
   import SearchField from '$lib/components/SearchField.svelte'
-  import IconLogo from '$lib/components/IconLogo.svelte'
+  import Logo from '$lib/components/icons/Logo.svelte'
   import FontFamilyDropdown from '$lib/components/FontFamilyDropdown.svelte'
   import ToggleTheme from '$lib/components/ToggleTheme.svelte'
   import { searchResult, search, searchResults, searching, searchQuery } from '$lib/stores/searchResult'
@@ -34,7 +34,7 @@
 <div class="root">
   <div class="heading">
     <div class="icon-logo-container">
-      <IconLogo />
+      <Logo />
     </div>
     <div class="font-dropdown-container">
       <FontFamilyDropdown />

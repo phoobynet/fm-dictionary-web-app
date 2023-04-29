@@ -1,5 +1,5 @@
 <script lang="ts">
-  import iconSearch from '$lib/assets/images/icon-search.svg'
+  import Search from '$lib/components/icons/Search.svelte'
   import { searchQuery } from '$lib/stores/searchResult'
 
   export let error = ''
@@ -21,11 +21,7 @@
       placeholder="Search for any word..."
       type="text"
     >
-    <img
-      alt=""
-      class="search-logo"
-      src={iconSearch}
-    >
+    <Search />
   </div>
   {#if error}
     <div class="error-message">
