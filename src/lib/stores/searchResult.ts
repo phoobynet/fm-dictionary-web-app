@@ -5,6 +5,8 @@ import { browser } from '$app/environment'
 
 export const searchQuery = writable<string>('')
 
+export const searchError = writable<boolean>(false)
+
 export const searchResults = writable<SearchResult[]>([])
 
 export const searchResult = derived(searchResults, $searchResult => {
@@ -30,7 +32,16 @@ export const search = async (query: string = ''): Promise<boolean> => {
 
   let result = false
 
-  if (query.trim().length < 2) {
+  query = query.trim() ?? ''
+
+  if (query.length === 0) {
+    searchResults.set([])
+    searchError.set(true)
+  } else {
+    searchError.set(false)
+  }
+
+  if (query.length < 2) {
     return result
   }
 

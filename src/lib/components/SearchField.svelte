@@ -1,36 +1,37 @@
-<script lang="ts">
+<script lang='ts'>
   import Search from '$lib/components/icons/Search.svelte'
-  import { searchQuery } from '$lib/stores/searchResult'
-
-  export let error = ''
+  import { searchQuery, searchError } from '$lib/stores/searchResult'
+  import { fade } from 'svelte/transition'
 
   let isFocused = false
+
+  $:error = $searchError && $searchQuery === ''
 </script>
 
-<div class="search-input">
+<div class='search-input'>
   <div
-    class="input-content"
-    class:error={!!error}
+    class='input-content'
+    class:error={error}
     class:focused={isFocused}
   >
     <input
-      class="input"
+      class='input'
       on:blur={() => isFocused = false}
       on:focus={() => isFocused = true}
       bind:value={$searchQuery}
-      placeholder="Search for any word..."
-      type="text"
+      placeholder='Search for any word...'
+      type='text'
     >
     <Search />
   </div>
   {#if error}
-    <div class="error-message">
-      {error}
+    <div class='error-message' transition:fade>
+      Whoops, can't be empty
     </div>
   {/if}
 </div>
 
-<style lang="scss">
+<style lang='scss'>
   .search-input {
     .input-content {
       display: grid;
