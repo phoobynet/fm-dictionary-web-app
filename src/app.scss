@@ -81,6 +81,7 @@
 
 body {
   background-color: var(--color-bg-primary);
+  overflow-y: scroll;
 
   &[data-font-family="sans-serif"] {
     font-family: var(--font-sans-serif);

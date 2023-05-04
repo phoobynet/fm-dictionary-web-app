@@ -3,6 +3,7 @@
 
   // DO NOT REMOVE THIS IMPORT - required for loading the body tags class
   import '$lib/stores/theme'
+
 </script>
 
 <div class="layout">

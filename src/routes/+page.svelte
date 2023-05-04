@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang='ts'>
   import SearchField from '$lib/components/SearchField.svelte'
   import Logo from '$lib/components/icons/Logo.svelte'
   import FontFamilyDropdown from '$lib/components/FontFamilyDropdown.svelte'
@@ -12,15 +12,20 @@
   import { getQuery } from '$lib/url/getQuery'
   import NoDefinitionFound from '$lib/components/NoDefinitionFound.svelte'
   import { pushQuery } from '$lib/url/pushQuery'
+  import { Jumper } from 'svelte-loading-spinners'
 
   export let data: PageData
 
-  const onSubmit = debounce(async () => {
+  const runQuery = async () => {
     const hasResult = await search($searchQuery)
 
     if (hasResult) {
       pushQuery($searchQuery)
     }
+  }
+
+  const onSubmit = debounce(async () => {
+    await runQuery()
   }, 500)
 
   onMount(() => {
@@ -29,33 +34,42 @@
       searchResults.set(data.result)
     }
   })
+
+  const onPopState = async () => {
+    searchQuery.set(getQuery())
+    await runQuery()
+  }
 </script>
 
-<div class="root">
-  <div class="heading">
-    <div class="icon-logo-container">
+<svelte:window on:popstate={onPopState} />
+
+<div class='root'>
+  <div class='heading'>
+    <div class='icon-logo-container'>
       <Logo />
     </div>
-    <div class="font-dropdown-container">
+    <div class='font-dropdown-container'>
       <FontFamilyDropdown />
     </div>
-    <div class="vertical-divider"></div>
-    <div class="toggle-theme-container">
+    <div class='vertical-divider'></div>
+    <div class='toggle-theme-container'>
       <ToggleTheme />
     </div>
   </div>
   <form
-    class="search-field"
+    class='search-field'
     on:submit|preventDefault={onSubmit}
   >
     <SearchField />
   </form>
-  <main class="search-result">
+  <main class='search-result'>
     {#if $searching}
-      <p>TODO: Add spinner loading...</p>
+      <div class='loading-container'>
+        <Jumper size='100' color='var(--color-purple)' unit='px' duration='1s' />
+      </div>
     {/if}
     {#if $searchResult && !$searching}
-      <div transition:fade>
+      <div in:fade>
         <SearchResult />
       </div>
     {:else if !$searching && $searchResults.length === 0}
@@ -65,7 +79,7 @@
 </div>
 
 
-<style lang="scss">
+<style lang='scss'>
   .root {
     display: grid;
     row-gap: 1rem;
@@ -108,6 +122,12 @@
 
     .search-field {
       grid-area: search-field;
+    }
+
+    .loading-container {
+      display: flex;
+      justify-content: center;
+      margin: 5rem 0;
     }
   }
 </style>
