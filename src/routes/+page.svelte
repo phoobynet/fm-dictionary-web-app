@@ -15,8 +15,10 @@
   import { Jumper } from 'svelte-loading-spinners'
 
   export let data: PageData
+  let hasSearched = false
 
   const runQuery = async () => {
+    hasSearched = true
     const hasResult = await search($searchQuery)
 
     if (hasResult) {
@@ -72,7 +74,7 @@
       <div in:fade>
         <SearchResult />
       </div>
-    {:else if !$searching && $searchResults.length === 0 && !$searchError}
+    {:else if !$searching && $searchResults.length === 0 && !$searchError && $searchQuery && hasSearched}
       <NoDefinitionFound />
     {:else}
       <div></div>
