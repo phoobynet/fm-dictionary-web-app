@@ -1,9 +1,8 @@
-<script lang="ts">
-  import { fontFamily, fontFamilyPrettyName } from '$lib/stores/fontFamily'
+<script lang='ts'>
+  import { fontFamily, fontFamilyPrettyName, FontFamily, toPrettyFontFamilyName } from '$lib/font'
   import ArrowDown from '$lib/components/icons/ArrowDown.svelte'
   import { clickOutside } from '$lib/actions/clickOutside'
   import { slide } from 'svelte/transition'
-  import { FontFamily, toPrettyFontFamilyName } from '$lib/types/FontFamily'
 
   let open = false
 
@@ -29,26 +28,26 @@
 <svelte:document on:keyup={handleEscape}></svelte:document>
 
 <nav
-  aria-label="Main"
-  class="font-family-dropdown"
+  aria-label='Main'
+  class='font-family-dropdown'
   on:click={onOpenMenu}
   use:clickOutside={() => {
     open = false
   }}
 >
-  <div class="currently-selected-font">
+  <div class='currently-selected-font'>
     <div
       class={`name-container ${$fontFamily}`}
     >
       {$fontFamilyPrettyName}
     </div>
-    <div class="arrow-container">
+    <div class='arrow-container'>
       <ArrowDown />
     </div>
   </div>
   {#if open}
     <div
-      class="dropdown"
+      class='dropdown'
       transition:slide
     >
       <ul>
@@ -65,7 +64,7 @@
   {/if}
 </nav>
 
-<style lang="scss">
+<style lang='scss'>
   .font-family-dropdown {
     position: relative;
     display: flex;

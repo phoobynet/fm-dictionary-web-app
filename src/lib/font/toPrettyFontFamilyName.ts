@@ -1,8 +1,4 @@
-export enum FontFamily {
-  Serif = 'serif',
-  SansSerif = 'sans-serif',
-  Mono = 'mono',
-}
+import { FontFamily } from '$lib/font/FontFamily'
 
 export const toPrettyFontFamilyName = (fontFamily: FontFamily) => {
   switch (fontFamily) {

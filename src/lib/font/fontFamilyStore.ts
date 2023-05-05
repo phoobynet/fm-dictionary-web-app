@@ -1,7 +1,7 @@
 import { derived, writable } from 'svelte/store'
 import { browser } from '$app/environment'
-import { FontFamily, toPrettyFontFamilyName } from '$lib/types/FontFamily'
-import { AppConfig } from '$lib/config/AppConfig'
+import type { FontFamily } from '$lib/font/FontFamily'
+import { toPrettyFontFamilyName } from '$lib/font/toPrettyFontFamilyName'
 
 const FONT_FAMILY_ATTR = 'data-font-family'
 export const fontFamily = writable<FontFamily>()
@@ -13,7 +13,14 @@ fontFamily.subscribe(value => {
     attr.value = value
 
     document.body.attributes.setNamedItem(attr)
-    AppConfig.getInstance().fontFamily = value
+
+    // Lazy import to avoid issues with accessing lexical declaration
+    // I can't figure out why this would be an issue
+    import('$lib/config/AppConfig').then(({ AppConfig }) => {
+      if (AppConfig.getInstance()) {
+        AppConfig.getInstance().fontFamily = value
+      }
+    })
   }
 })
 

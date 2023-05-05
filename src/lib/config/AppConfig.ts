@@ -1,6 +1,5 @@
-import { FontFamily } from '$lib/types/FontFamily'
-import { ThemeType } from '$lib/types/ThemeType'
-import { isDark } from '$lib/theme/isDark'
+import { FontFamily } from '$lib/font'
+import { ThemeType, isDarkTheme } from '$lib/theme'
 
 let appConfig: AppConfig | undefined
 
@@ -19,7 +18,7 @@ export class AppConfig {
       return storedScheme as ThemeType
     }
 
-    return isDark() ? ThemeType.dark : ThemeType.light
+    return isDarkTheme() ? ThemeType.dark : ThemeType.light
   }
 
   public set themeType(value: ThemeType) {

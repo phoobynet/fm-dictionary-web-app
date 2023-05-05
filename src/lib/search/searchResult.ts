@@ -1,3 +1,7 @@
+import { derived } from 'svelte/store'
+import { first } from 'lodash-es'
+import { searchResults } from './searchResults'
+
 export interface SearchResultLicense {
   name: string
   url: string
@@ -33,3 +37,6 @@ export interface SearchResult {
   license: SearchResultLicense
 }
 
+export const searchResult = derived(searchResults, $searchResult => {
+  return first($searchResult)
+})

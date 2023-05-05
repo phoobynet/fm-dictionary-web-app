@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store'
 import { browser } from '$app/environment'
-import { ThemeType } from '$lib/types/ThemeType'
+import { ThemeType } from '$lib/theme/ThemeType'
 import { AppConfig } from '$lib/config/AppConfig'
 
 export const theme = writable<ThemeType>(undefined, (set) => {

@@ -2,9 +2,9 @@
   import '../app.scss'
 
   // DO NOT REMOVE THIS IMPORT - required for loading the body tags class
-  import '$lib/stores/theme'
+  import '$lib/theme'
   import { onMount } from 'svelte'
-  import { fontFamily } from '$lib/stores/fontFamily'
+  import { fontFamily } from '$lib/font'
   import { AppConfig } from '$lib/config/AppConfig'
 
   onMount(() => {

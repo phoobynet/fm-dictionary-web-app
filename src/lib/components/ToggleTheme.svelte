@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { theme } from '$lib/stores/theme'
+  import { theme, ThemeType } from '$lib/theme'
   import Moon from '$lib/components/icons/Moon.svelte'
 
   const onClick = () => {
-    theme.update(curr => curr === 'dark'
-      ? 'light'
-      : 'dark')
+    theme.update(curr => curr === ThemeType.dark
+      ? ThemeType.light
+      : ThemeType.dark)
   }
 </script>
 

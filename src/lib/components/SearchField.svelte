@@ -1,6 +1,6 @@
 <script lang='ts'>
   import Search from '$lib/components/icons/Search.svelte'
-  import { searchQuery, searchError } from '$lib/stores/searchResult'
+  import { searchQuery, searchError } from '$lib/search'
   import { fade } from 'svelte/transition'
 
   let isFocused = false

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { searchResult, audioUrl, search, searchQuery } from '$lib/stores/searchResult'
+  import { searchResult, audioUrl, search, searchQuery } from '$lib/search'
   import Play from '$lib/components/icons/Play.svelte'
   import { pushQuery } from '$lib/url/pushQuery'
 

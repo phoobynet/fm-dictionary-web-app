@@ -3,7 +3,7 @@
   import Logo from '$lib/components/icons/Logo.svelte'
   import FontFamilyDropdown from '$lib/components/FontFamilyDropdown.svelte'
   import ToggleTheme from '$lib/components/ToggleTheme.svelte'
-  import { searchResult, search, searchResults, searching, searchQuery, searchError } from '$lib/stores/searchResult'
+  import { searchResult, search, searchResults, searching, searchQuery, searchError } from '$lib/search'
   import { debounce } from 'lodash-es'
   import SearchResult from '$lib/components/SearchResult.svelte'
   import { fade } from 'svelte/transition'

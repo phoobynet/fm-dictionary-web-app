@@ -1,4 +1,4 @@
-import type { SearchResult } from '$lib/types/SearchResult'
+import type { SearchResult } from '$lib/search'
 import { browser } from '$app/environment'
 
 const BASE_URL = 'https://api.dictionaryapi.dev/api/v2/entries/en/'

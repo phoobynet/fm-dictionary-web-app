@@ -1,26 +1,7 @@
-import type { SearchResult } from '$lib/types/SearchResult'
-import { derived, writable } from 'svelte/store'
-import { first } from 'lodash-es'
 import { browser } from '$app/environment'
-
-export const searching = writable<boolean>(false)
-export const searchQuery = writable<string>('')
-export const searchError = writable<boolean>(false)
-export const searchResults = writable<SearchResult[]>([])
-
-export const searchResult = derived(searchResults, $searchResult => {
-  return first($searchResult)
-})
-
-export const audioUrl = derived(searchResult, $searchResult => {
-  let audioUrl = ''
-
-  if ($searchResult) {
-    audioUrl = $searchResult.phonetics.find(x => !!x.audio)?.audio || ''
-  }
-
-  return audioUrl
-})
+import { searchResults } from './searchResults'
+import { searchError } from './searchError'
+import { searching } from './searching'
 
 export const search = async (query: string = ''): Promise<boolean> => {
   if (!browser) {
