@@ -1,18 +1,25 @@
-<script lang="ts">
+<script lang='ts'>
   import '../app.scss'
 
   // DO NOT REMOVE THIS IMPORT - required for loading the body tags class
   import '$lib/stores/theme'
+  import { onMount } from 'svelte'
+  import { fontFamily } from '$lib/stores/fontFamily'
+  import { AppConfig } from '$lib/config/AppConfig'
+
+  onMount(() => {
+    $fontFamily = AppConfig.getInstance().fontFamily
+  })
 
 </script>
 
-<div class="layout">
+<div class='layout'>
   <main>
     <slot></slot>
   </main>
 </div>
 
-<style lang="scss">
+<style lang='scss'>
   .layout {
     display: flex;
     justify-content: center;

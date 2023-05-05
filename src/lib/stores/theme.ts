@@ -1,44 +1,41 @@
 import { writable } from 'svelte/store'
 import { browser } from '$app/environment'
-
-export type ThemeType = 'dark' | 'light'
+import { ThemeType } from '$lib/types/ThemeType'
+import { AppConfig } from '$lib/config/AppConfig'
 
 export const theme = writable<ThemeType>(undefined, (set) => {
   const onChange = (e: MediaQueryListEvent) => {
     const themeType: ThemeType = e.matches
-      ? 'dark'
-      : 'light'
+      ? ThemeType.dark
+      : ThemeType.light
 
     theme.set(themeType)
+    AppConfig.getInstance().themeType = themeType
   }
 
   if (browser) {
-    const media = window.matchMedia('(prefers-color-scheme: dark)')
+    const themeType = AppConfig.getInstance().themeType
 
+    set(themeType)
+
+    const media = window.matchMedia(`(prefers-color-scheme: ${ThemeType.dark})`)
     media.addEventListener('change', onChange)
-
-    if (media.matches) {
-      set('dark')
-    } else {
-      set('light')
-    }
   }
 
   return () => {
     if (browser) {
-      window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', onChange)
+      window.matchMedia(`(prefers-color-scheme: ${ThemeType.dark})`).removeEventListener('change', onChange)
     }
   }
 })
 
 if (browser) {
   theme.subscribe((value) => {
-    if (value === 'dark') {
-      document.body.classList.add('dark')
-      document.body.classList.remove('light')
-    } else {
-      document.body.classList.add('light')
-      document.body.classList.remove('dark')
-    }
+    const { classList } = document.body
+    const addTheme = value === ThemeType.dark ? ThemeType.dark : ThemeType.light
+    const removeTheme = value === ThemeType.dark ? ThemeType.light : ThemeType.dark
+    classList.add(addTheme)
+    classList.remove(removeTheme)
+    AppConfig.getInstance().themeType = addTheme
   })
 }

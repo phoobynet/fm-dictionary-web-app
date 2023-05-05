@@ -1,54 +1,21 @@
 import { derived, writable } from 'svelte/store'
 import { browser } from '$app/environment'
+import { FontFamily, toPrettyFontFamilyName } from '$lib/types/FontFamily'
+import { AppConfig } from '$lib/config/AppConfig'
 
-export enum FontFamily {
-  Serif = 'serif',
-  SansSerif = 'sans-serif',
-  Mono = 'mono',
-}
-
-export const fontFamily = writable<FontFamily>(FontFamily.SansSerif, (set) => {
-  if (browser) {
-    // TODO: Add code to read from localStorage
-    set(FontFamily.SansSerif)
-  }
-})
+const FONT_FAMILY_ATTR = 'data-font-family'
+export const fontFamily = writable<FontFamily>()
 
 fontFamily.subscribe(value => {
+  // Sets the font family on the body element, and updates the local storage value
   if (browser) {
-    let attr = document.body.attributes.getNamedItem('data-font-family')
-
-    if (!attr) {
-      attr = document.createAttribute('data-font-family')
-    }
-
-    switch (value) {
-      case FontFamily.Serif:
-        attr.value = 'serif'
-        break
-      case FontFamily.SansSerif:
-        attr.value = 'sans-serif'
-        break
-      case FontFamily.Mono:
-        attr.value = 'mono'
-        break
-    }
+    const attr = document.body.attributes.getNamedItem(FONT_FAMILY_ATTR) ?? document.createAttribute(FONT_FAMILY_ATTR)
+    attr.value = value
 
     document.body.attributes.setNamedItem(attr)
+    AppConfig.getInstance().fontFamily = value
   }
 })
 
-export const toPrettyName = (fontFamily: FontFamily) => {
-  switch (fontFamily) {
-    case FontFamily.SansSerif:
-      return 'Sans Serif'
-    case FontFamily.Serif:
-      return 'Serif'
-    case FontFamily.Mono:
-      return 'Mono'
-    default:
-      return 'Sans Serif'
-  }
-}
-
-export const fontFamilyPrettyName = derived(fontFamily, $fontFamily => toPrettyName($fontFamily))
+// Prettifies the font family name for display in the UI
+export const fontFamilyPrettyName = derived(fontFamily, $fontFamily => toPrettyFontFamilyName($fontFamily))

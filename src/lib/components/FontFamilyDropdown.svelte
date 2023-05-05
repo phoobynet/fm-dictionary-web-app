@@ -1,8 +1,9 @@
 <script lang="ts">
-  import { FontFamily, fontFamily, fontFamilyPrettyName, toPrettyName } from '$lib/stores/fontFamily'
+  import { fontFamily, fontFamilyPrettyName } from '$lib/stores/fontFamily'
   import ArrowDown from '$lib/components/icons/ArrowDown.svelte'
   import { clickOutside } from '$lib/actions/clickOutside'
   import { slide } from 'svelte/transition'
+  import { FontFamily, toPrettyFontFamilyName } from '$lib/types/FontFamily'
 
   let open = false
 
@@ -56,7 +57,7 @@
             class={option}
             on:click|stopPropagation={() => onFontSelect(option)}
           >
-            {toPrettyName(option)}
+            {toPrettyFontFamilyName(option)}
           </li>
         {/each}
       </ul>

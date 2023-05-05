@@ -3,10 +3,9 @@ import { derived, writable } from 'svelte/store'
 import { first } from 'lodash-es'
 import { browser } from '$app/environment'
 
+export const searching = writable<boolean>(false)
 export const searchQuery = writable<string>('')
-
 export const searchError = writable<boolean>(false)
-
 export const searchResults = writable<SearchResult[]>([])
 
 export const searchResult = derived(searchResults, $searchResult => {
@@ -22,8 +21,6 @@ export const audioUrl = derived(searchResult, $searchResult => {
 
   return audioUrl
 })
-
-export const searching = writable<boolean>(false)
 
 export const search = async (query: string = ''): Promise<boolean> => {
   if (!browser) {
