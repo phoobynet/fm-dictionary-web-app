@@ -2,6 +2,7 @@
   import { searchResult, audioUrl, search, searchQuery } from '$lib/search'
   import Play from '$lib/components/icons/Play.svelte'
   import { pushQuery } from '$lib/url/pushQuery'
+  import NewWindow from '$lib/components/icons/NewWindow.svelte'
 
   const onPlay = () => {
     if ($audioUrl) {
@@ -69,9 +70,16 @@
       </article>
     {/each}
     {#if $searchResult.sourceUrls}
-      {#each $searchResult.sourceUrls as sourceUrl}
-        <div>{sourceUrl}</div>
-      {/each}
+      <div class='sources'>
+        <div class='border'></div>
+        <div class='source-title'>Source</div>
+        {#each $searchResult.sourceUrls as sourceUrl}
+          <div>
+            <a class='source' href={sourceUrl}>{sourceUrl}</a>
+            <NewWindow />
+          </div>
+        {/each}
+      </div>
     {/if}
   </section>
 </div>
@@ -124,12 +132,6 @@
           display: flex;
           gap: 1rem;
           align-items: center;
-
-          .border {
-            height: 2px;
-            width: 100%;
-            background-color: var(--color-light-gray);
-          }
         }
 
         h3 {
@@ -195,6 +197,16 @@
             }
           }
         }
+      }
+    }
+
+    .sources {
+      hr {
+        color: var(--color-light-gray);
+      }
+      .source {
+        text-decoration: none;
+        color: var(--color-gray);
       }
     }
   }

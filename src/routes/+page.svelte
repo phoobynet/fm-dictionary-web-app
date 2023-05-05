@@ -41,6 +41,8 @@
     searchQuery.set(getQuery())
     await runQuery()
   }
+
+  $: showNoDefinition = !$searching && $searchResults.length === 0 && !$searchError && $searchQuery && hasSearched
 </script>
 
 <svelte:window on:popstate={onPopState} />
@@ -74,7 +76,7 @@
       <div in:fade>
         <SearchResult />
       </div>
-    {:else if !$searching && $searchResults.length === 0 && !$searchError && $searchQuery && hasSearched}
+    {:else if showNoDefinition}
       <NoDefinitionFound />
     {:else}
       <div></div>
