@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang='ts'>
   import { searchResult, audioUrl, search, searchQuery } from '$lib/search'
   import Play from '$lib/components/icons/Play.svelte'
   import { pushQuery } from '$lib/url/pushQuery'
@@ -20,39 +20,44 @@
   }
 </script>
 
-<div class="search-result">
-  <header>
-    <h1 class="word">{$searchResult.word}</h1>
+<div class='search-result'>
+  <header class:has-phonetic={$searchResult.phonetic}>
+    <h1 class='word'>{$searchResult.word}</h1>
     {#if $searchResult.phonetic}
-      <h2 class="phonetic">{$searchResult.phonetic}</h2>
+      <h2 class='phonetic'>{$searchResult.phonetic}</h2>
     {/if}
-    <div class="play">
+    <div class='play'>
       <Play on:click={onPlay} />
     </div>
   </header>
 
-  <section class="meanings">
+  <section class='meanings'>
     {#each $searchResult.meanings as meaning}
       <article>
-        <div class="part-of-speech">{meaning.partOfSpeech}</div>
+        <div class='part-of-speech'>
+          <div>
+            {meaning.partOfSpeech}
+          </div>
+          <div class='border'></div>
+        </div>
         <h3>Meaning</h3>
         <ul>
           {#each meaning.definitions as definition}
             <li>
-              <div class="definition">{definition.definition}</div>
+              <div class='definition'>{definition.definition}</div>
               {#if definition.example}
-                <div class="example">{definition.example}</div>
+                <div class='example'>{definition.example}</div>
               {/if}
             </li>
           {/each}
         </ul>
         {#if meaning.synonyms.length }
-          <div class="synonyms">
+          <div class='synonyms'>
             <h3>Synonyms</h3>
-            <div class="list-of-synonyms">
+            <div class='list-of-synonyms'>
               {#each meaning.synonyms as synonym}
                 <a
-                  class="synonym"
+                  class='synonym'
                   href={`/?q=${synonym}`}
                   on:click|preventDefault={() => onSynonymClick(synonym)}
                 >{synonym}</a>
@@ -60,20 +65,32 @@
             </div>
           </div>
         {/if}
+
       </article>
     {/each}
+    {#if $searchResult.sourceUrls}
+      {#each $searchResult.sourceUrls as sourceUrl}
+        <div>{sourceUrl}</div>
+      {/each}
+    {/if}
   </section>
 </div>
-<style lang="scss">
+<style lang='scss'>
   .search-result {
     color: var(--color-text-primary);
 
     header {
       display: grid;
-      grid-template-rows: repeat(2, 3rem);
+      grid-template-rows: repeat(1, 6rem);
       grid-template-areas:
+      "word play";
+
+      &.has-phonetic {
+        grid-template-rows: repeat(2, 3rem);
+        grid-template-areas:
         "word play"
         "phonetic play";
+      }
 
       .word {
         font-size: 2rem;
@@ -104,6 +121,15 @@
           font-size: 24px;
           font-weight: 700;
           font-style: italic;
+          display: flex;
+          gap: 1rem;
+          align-items: center;
+
+          .border {
+            height: 2px;
+            width: 100%;
+            background-color: var(--color-light-gray);
+          }
         }
 
         h3 {

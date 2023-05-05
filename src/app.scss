@@ -44,6 +44,8 @@
   --color-very-light-gray: #f4f4f4;
   --color-white: #ffffff;
   --color-purple: rgb(164, 69, 237);
+  --color-purple-selection-dark: rgba(164, 69, 237, 0.7);
+  --color-purple-selection-light: rgba(164, 69, 237, 0.2);
   --color-red: #ff5252;
 
 
@@ -54,6 +56,10 @@
     --color-input-text: var(--color-white);
     --color-input-placeholder: var(--color-white);
     --color-box-shadow: var(--color-purple);
+
+    ::selection {
+      background-color: var(--color-purple-selection-dark)
+    }
   }
 
   body.light {
@@ -63,6 +69,9 @@
     --color-input-text: var(--color-very-dark-gray);
     --color-input-placeholder: var(--color-very-dark-gray);
     --color-box-shadow: rgba(0, 0, 0, 0.1);
+    ::selection {
+      background-color: var(--color-purple-selection-light);
+    }
   }
 }
 
